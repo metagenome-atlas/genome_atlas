@@ -3,4 +3,6 @@ mem: 50
 
 # classify
 large_mem: 100
-runtime_long: 24
+runtime:
+  long: 24
+  default: 10

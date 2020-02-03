@@ -74,7 +74,7 @@ rule classify:
         config['threads'] #pplacer needs much memory for not many threads
     resources:
         mem=config['large_mem'],
-        time=config["runtime_long"]
+        time=config["runtime"]["long"]
     conda:
         "../envs/gtdbtk.yaml"
     log:

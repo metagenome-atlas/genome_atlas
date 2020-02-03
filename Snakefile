@@ -27,3 +27,10 @@ genome_dir=config['genome_dir']
 
 
 include: "rules/gtdbtk.smk"
+
+## add default resources
+for r in workflow.rules:
+    if not "mem" in r.resources:
+        r.resources["mem"]=config["mem"]
+    if not "time" in r.resources:
+        r.resources["time"]=config["runtime"]["default"]

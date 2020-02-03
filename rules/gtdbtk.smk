@@ -1,6 +1,6 @@
 
 
-gtdb_dir="genomes/taxonomy/gtdb"
+gtdb_dir="taxonomy/gtdb"
 
 
 
@@ -90,7 +90,7 @@ rule classify:
         "--extension {params.extension} "
         "--cpus {threads} &> {log[0]}"
 
-msa_paths={'checkm':"genomes/checkm/storage/tree/concatenated.fasta",
+msa_paths={'checkm':"checkm/storage/tree/concatenated.fasta",
            'gtdbtk.bac120': f"{gtdb_dir}/align/gtdbtk.bac120.user_msa.fasta",
            'gtdbtk.ar122': f"{gtdb_dir}/align/gtdbtk.ar122.user_msa.fasta"
 }
@@ -99,9 +99,9 @@ rule fasttree:
     input:
         lambda wildcards: msa_paths[wildcards.msa]
     output:
-        temp("genomes/tree/{msa}.unrooted.nwk")
+        temp("tree/{msa}.unrooted.nwk")
     log:
-        "logs/genomes/tree/FastTree_{msa}.log"
+        "logs/tree/FastTree_{msa}.log"
     threads:
         max(config['threads'],3)
     conda:
@@ -114,17 +114,17 @@ rule fasttree:
 localrules: root_tree
 rule root_tree:
     input:
-        tree="genomes/tree/{msa}.unrooted.nwk",
+        tree="tree/{msa}.unrooted.nwk",
     wildcard_constraints:
         msa="((?!unrooted).)*"
     output:
-        tree="genomes/tree/{msa}.nwk",
+        tree="tree/{msa}.nwk",
     conda:
         "../envs/tree.yaml"
     threads:
         1
     log:
-        "logs/genomes/tree/root_tree_{msa}.log"
+        "logs/tree/root_tree_{msa}.log"
     script:
         "../scripts/root_tree.py"
 
@@ -134,11 +134,11 @@ def all_gtdb_trees_input(wildcards):
 
     domains = glob_wildcards(f"{dir}/gtdbtk.{{domain}}.user_msa.fasta").domain
 
-    return expand("genomes/tree/gtdbtk.{domain}.nwk",domain=domains)
+    return expand("tree/gtdbtk.{domain}.nwk",domain=domains)
 
 
 rule all_gtdb_trees:
     input:
         all_gtdb_trees_input
     output:
-        touch("genomes/tree/finished_gtdb_trees")
+        touch("tree/finished_gtdb_trees")

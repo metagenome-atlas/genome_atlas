@@ -20,6 +20,13 @@ rule call_genes:
         1
     run:
 
+        try:
+            from tqdm import tqdm
+        except ImportError:
+            def tqdm(*args):
+                return tuple(*args)
+
+
         for dir in output:
             os.makedirs(dir)
 
@@ -27,7 +34,7 @@ rule call_genes:
 
         all_genomes = glob_wildcards(path).genome
 
-        for genome in all_genomes:
+        for genome in tqdm(all_genomes):
 
             fasta = path.format(genome=genome)
 

@@ -14,7 +14,8 @@ rule call_genes:
     benchmark:
         "logs/benchmark/callgenes.txt"
     resources:
-        time=config["runtime"]["long"]
+        time=config["runtime"]["long"],
+        mem=20
     threads:
         1
     run:

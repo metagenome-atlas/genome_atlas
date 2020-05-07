@@ -10,7 +10,8 @@ singularity: "docker://continuumio/miniconda3"
 
 rule all:
     input:
-        "tree/finished_gtdb_trees"
+        "tree/finished_gtdb_trees",
+        "taxonomy/gtdb/classify"
 
 # add scripts
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(workflow.snakefile)),"scripts"))

@@ -28,6 +28,7 @@ genome_dir=config['genome_dir']
 
 
 include: "rules/gtdbtk.smk"
+include: "rules/call_genes.smk"
 
 ## add default resources
 for r in workflow.rules:

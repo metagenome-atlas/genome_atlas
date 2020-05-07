@@ -1,6 +1,8 @@
 threads: 8
 mem: 50
 
+fasta_extension: ".fasta"
+
 # classify
 large_mem: 100
 runtime:

@@ -13,6 +13,10 @@ rule call_genes:
         extension=config['fasta_extension']
     benchmark:
         "logs/benchmark/callgenes.txt"
+    resources:
+        time=config["runtime"]["long"]
+    threads:
+        1
     run:
 
         for dir in output:

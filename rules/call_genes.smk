@@ -7,6 +7,7 @@ rule call_genes:
         genome_dir
     output:
         faa=directory("annotations/faa"),
+        gff=directory("annotations/gff"),
         ribo=directory("annotations/16S"),
         stats=directory("annotations/stats")
     params:
@@ -39,6 +40,7 @@ rule call_genes:
             fasta = path.format(genome=genome)
 
             shell("callgenes.sh in={fasta} outa={output.faa}/{genome}.faa.gz"
+                  " out={output.gff}/{genome}.gff.gz"
                   " out16S={output.ribo}/{genome}.fasta"
                   " stats={output.stats}/{genome}.json json=t ow &> /dev/null"
                   )

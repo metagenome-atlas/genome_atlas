@@ -11,6 +11,8 @@ rule call_genes:
         stats=directory("annotations/stats")
     params:
         extension=config['fasta_extension']
+    benchmark:
+        "logs/benchmark/callgenes.txt"
     run:
 
         for dir in output:

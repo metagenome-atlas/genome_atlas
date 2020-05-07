@@ -35,7 +35,7 @@ rule identify:
         f"{gtdb_dir}/gtdbtk.log"
     params:
         outdir= gtdb_dir,
-        extension="fasta",
+        extension=config['fasta_extension'].replace('.',''),
     shell:
         "GTDBTK_DATA_PATH={GTDBTK_DATA_PATH} ; "
         "gtdbtk identify --genome_dir {input.dir} --out_dir {params.outdir} "
@@ -82,7 +82,7 @@ rule classify:
         f"{gtdb_dir}/gtdbtk.log"
     params:
         outdir= gtdb_dir,
-        extension="fasta",
+        extension=config['fasta_extension'].replace('.',''),
     shell:
         "GTDBTK_DATA_PATH={GTDBTK_DATA_PATH} ; "
         "gtdbtk classify --genome_dir {input.genome_dir} --align_dir {params.outdir} "

@@ -10,7 +10,7 @@ rule call_genes_genome:
         ribo="annotations/16S/{genome}.fasta",
         stats="annotations/stats/{genome}.json"
     resources:
-        time=config["runtime"]["long"],
+        time=0.2,
         mem=2
     threads:
         1

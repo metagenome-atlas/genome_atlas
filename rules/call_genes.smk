@@ -3,7 +3,7 @@
 
 rule call_genes_genome:
     input:
-        f"genome/{{genome}}{config['fasta_extension']}"
+        os.path.join(genome_dir,"{genome}"+config['fasta_extension'])
     output:
         faa="annotations/faa/{genome}.faa.gz",
         gff="annotations/gff/{genome}.gff.gz",

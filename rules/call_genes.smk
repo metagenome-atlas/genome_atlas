@@ -77,4 +77,4 @@ rule call_genes:
                       )
 
 
-        pool.map_async(callgenes, all_genomes)
+        pool.map(callgenes, all_genomes)

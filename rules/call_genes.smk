@@ -54,7 +54,7 @@ rule call_genes:
         pool = Pool(threads)
 
 
-        for dir in params.dir:
+        for dir in params.dirs:
             if not os.path.exists(dir):
                 os.makedirs(dir)
 

@@ -62,7 +62,7 @@ rule call_genes:
         all_genomes = glob_wildcards(path).genome
 
 
-        print(f"Call genes of {len(all_genomes)} gneomes in {threads} threads.)
+        print(f"Call genes of {len(all_genomes)} gneomes in {threads} threads.")
 
         def callgenes(genome):
 

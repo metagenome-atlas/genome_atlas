@@ -61,6 +61,9 @@ rule call_genes:
         path= os.path.join(input[0],"{genome}"+config['fasta_extension'])
         all_genomes = glob_wildcards(path).genome
 
+
+        print(f"Call genes of {len(all_genomes)} gneomes in {threads} threads.)
+
         def callgenes(genome):
 
             fasta = path.format(genome=genome)

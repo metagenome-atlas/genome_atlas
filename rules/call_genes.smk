@@ -39,7 +39,7 @@ rule call_genes:
     output:
         touch("annotations/call_genes_finished")
     params:
-        extension=config['fasta_extension'],
+        fasta_extension=config['fasta_extension'],
         dirs= ["annotations/faa","annotations/gff","annotations/16S","annotations/stats"]
     benchmark:
         "logs/benchmark/callgenes.txt"
@@ -48,33 +48,5 @@ rule call_genes:
         mem=20
     threads:
         10
-    run:
-        from multiprocessing import Pool
-
-        pool = Pool(threads)
-
-
-        for dir in params.dirs:
-            if not os.path.exists(dir):
-                os.makedirs(dir)
-
-        path= os.path.join(input[0],"{genome}"+config['fasta_extension'])
-        all_genomes = glob_wildcards(path).genome
-
-
-        print(f"Call genes of {len(all_genomes)} gneomes in {threads} threads.")
-
-        def callgenes(genome):
-
-            fasta = path.format(genome=genome)
-
-            if not os.path.exists(f"annotations/faa/{genome}.faa.gz"):
-
-                shell("callgenes.sh in={fasta} outa=annotations/faa/{genome}.faa.gz"
-                      " out=annotations/gff/{genome}.gff.gz"
-                      " out16S=annotations/16S/{genome}.fasta"
-                      " stats=annotations/stats/{genome}.json json=t ow "
-                      )
-
-
-        pool.map(callgenes, all_genomes)
+    script:
+        "../scripts/many_callgenes.py"

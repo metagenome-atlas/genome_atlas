@@ -40,7 +40,7 @@ rule call_genes:
         touch("annotations/call_genes_finished")
     params:
         extension=config['fasta_extension'],
-        dirs= "annotations/faa","annotations/gff","annotations/16S","annotations/stats"
+        dirs= ["annotations/faa","annotations/gff","annotations/16S","annotations/stats"]
     benchmark:
         "logs/benchmark/callgenes.txt"
     resources:
@@ -54,8 +54,9 @@ rule call_genes:
         pool = Pool(threads)
 
 
-        for dir in output:
-            os.makedirs(dir)
+        for dir in params.dir:
+            if not os.path.exists(dir):
+                os.makedirs(dir)
 
         path= os.path.join(input[0],"{genome}"+config['fasta_extension'])
         all_genomes = glob_wildcards(path).genome

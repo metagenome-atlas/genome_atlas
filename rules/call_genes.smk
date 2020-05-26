@@ -70,7 +70,7 @@ rule call_genes:
                 shell("callgenes.sh in={fasta} outa=annotations/faa/{genome}.faa.gz"
                       " out=annotations/gff/{genome}.gff.gz"
                       " out16S=annotations/16S/{genome}.fasta"
-                      " stats=annotations/stats/{genome}.json json=t ow &> /dev/null"
+                      " stats=annotations/stats/{genome}.json json=t ow "
                       )
 
 

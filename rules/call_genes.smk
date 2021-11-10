@@ -50,3 +50,25 @@ rule call_genes:
         10
     script:
         "../scripts/many_callgenes.py"
+
+
+# import pandas as pd
+# from glob import glob
+# D= {}
+#
+# for j in glob('stats/*.json'):
+#     ...:
+#     ...:     name= os.path.splitext( os.path.basename(j))[0]
+#     ...:     print(name)
+#     ...:     try:
+#     ...:
+#     ...:         d= pd.read_json(j).stack()
+#     ...:         D[name]=d
+#     ...:     except ValueError:
+#     ...:         pass
+                # not all files have content
+#
+#
+# D= pd.concat(D,axis=1).T
+#
+# D.to_csv('Combined_stats.tsv',sep='\t')

@@ -11,7 +11,9 @@ singularity: "docker://continuumio/miniconda3"
 rule all:
     input:
         "tree/finished_gtdb_trees",
-        "taxonomy/gtdb/classify"
+        "taxonomy/gtdb/classify",
+        "annotations/dram/distil",
+        "annotations/dram/kegg_modules.tsv",
 
 # add scripts
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(workflow.snakefile)),"scripts"))
@@ -28,6 +30,7 @@ genome_dir=config['genome_dir']
 
 
 include: "rules/gtdbtk.smk"
+include: "rules/dram.smk"
 include: "rules/call_genes.smk"
 
 ## add default resources
